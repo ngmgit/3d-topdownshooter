@@ -35,6 +35,6 @@ public class CharacterMovement : MonoBehaviour {
 	void FixedUpdate ()
 	{
 		Vector3 movement  =  new Vector3(m_input.m_horizontal, 0, m_input.m_vertical);
-		rb.AddForce(movement * speed / Time.deltaTime);
+		rb.AddForce(movement.normalized * speed / Time.deltaTime);
 	}
 }
