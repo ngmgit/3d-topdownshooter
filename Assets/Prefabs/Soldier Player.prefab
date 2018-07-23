@@ -239,7 +239,7 @@ GameObject:
   - component: {fileID: 198714330645744784}
   - component: {fileID: 199127671885526008}
   m_Layer: 0
-  m_Name: Particle System
+  m_Name: Bullet Tracer Particle
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -890,6 +890,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_speed: 1.3
+  m_healthText: {fileID: 0}
+  m_bulletParticleSystem: {fileID: 198714330645744784}
 --- !u!114 &114229087968366496
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -4567,7 +4569,7 @@ ParticleSystem:
         m_PostInfinity: 2
         m_RotationOrder: 4
     minKillSpeed: 0
-    maxKillSpeed: 10000
+    maxKillSpeed: 1000
     radiusScale: 1
     collidesWith:
       serializedVersion: 2

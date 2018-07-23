@@ -5,13 +5,16 @@ using UnityEngine.UI;
 
 public class CharacterMovement : MonoBehaviour {
 
-	public float m_speed =  4;
+	public float m_speed =  1.3f;
 	public Text m_healthText;
+	public ParticleSystem m_bulletParticleSystem;
 
 	Rigidbody rb;
 	float m_health = 150f;
 	Vector3 lookPos;
 	InputController m_input;
+	ParticleSystem.EmissionModule m_emissionModule;
+
 
 	// Use this for initialization
 	void Start ()
@@ -19,6 +22,7 @@ public class CharacterMovement : MonoBehaviour {
 		m_healthText.text = "HEALTH: " + m_health;
 		rb = GetComponent<Rigidbody>();
 		m_input = GetComponent<InputController>();
+		m_emissionModule = m_bulletParticleSystem.emission;
 	}
 
 	void Update ()
@@ -34,6 +38,8 @@ public class CharacterMovement : MonoBehaviour {
 		lookDir.y = 0;
 
 		transform.LookAt (transform.position + lookDir, Vector3.up);
+
+		m_emissionModule.enabled = m_input.m_shoot;
 	}
 
 	void FixedUpdate ()

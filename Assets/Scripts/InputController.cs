@@ -12,6 +12,6 @@ public class InputController : MonoBehaviour {
 	void Update () {
 		m_horizontal = Input.GetAxis ("Horizontal");
 		m_vertical = Input.GetAxis ("Vertical");
-		m_shoot = Input.GetKeyDown (KeyCode.Mouse0);
+		m_shoot = Input.GetKey (KeyCode.Mouse0);
 	}
 }

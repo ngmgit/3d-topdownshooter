@@ -9,19 +9,19 @@ public class Enemy : MonoBehaviour {
 	public const float CHASE_INITIATE_DISTANCE = 13f;
 	public const float CHASE_THRESHOLD_DISTANCE = 20f;
 	public const float ATTACK_DISTANCE = 2f;
-	public const float DAMAGE = 10f;
+	public const float DAMAGE = 5f;
 
 	NavMeshAgent m_agent;
 	Animator m_animator;
 	[HideInInspector]
 	public GameObject m_player;
 
-	public float m_range;
+	public float m_wanderRange;
 	public float m_damageDistance;
 
 
 	public Vector3 GetRandomNavMeshPositin () {
-		Vector3 randomPoint = transform.position + Random.insideUnitSphere * m_range;
+		Vector3 randomPoint = transform.position + Random.insideUnitSphere * m_wanderRange;
 		NavMeshHit navHit;
 		NavMesh.SamplePosition(randomPoint, out navHit, 1.0f, NavMesh.AllAreas);
 		return navHit.position;
@@ -42,10 +42,7 @@ public class Enemy : MonoBehaviour {
 		m_animator.SetBool("Walk", true);
 	}
 
-	void Update () {
-	}
-
-	void OnTriggerStay (Collider col) {
+	void OnTriggerEnter (Collider col) {
 		if (col.tag == "Player") {
 			m_animator.SetBool ("Attack", true);
 		}
