@@ -1,18 +1,22 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class CharacterMovement : MonoBehaviour {
 
-	Rigidbody rb;
-	public float speed =  4;
+	public float m_speed =  4;
+	public Text m_healthText;
 
-	private Vector3 lookPos;
+	Rigidbody rb;
+	float m_health = 150f;
+	Vector3 lookPos;
 	InputController m_input;
 
 	// Use this for initialization
 	void Start ()
 	{
+		m_healthText.text = "HEALTH: " + m_health;
 		rb = GetComponent<Rigidbody>();
 		m_input = GetComponent<InputController>();
 	}
@@ -35,6 +39,15 @@ public class CharacterMovement : MonoBehaviour {
 	void FixedUpdate ()
 	{
 		Vector3 movement  =  new Vector3(m_input.m_horizontal, 0, m_input.m_vertical);
-		rb.AddForce(movement.normalized * speed / Time.deltaTime);
+		rb.AddForce(movement.normalized * m_speed / Time.deltaTime);
+	}
+
+	public void DamagePlayer (float dmg) {
+		m_health = m_health - dmg;
+		SetHealthText ();
+	}
+
+	void SetHealthText () {
+		m_healthText.text = "HEALTH: " + m_health;
 	}
 }
