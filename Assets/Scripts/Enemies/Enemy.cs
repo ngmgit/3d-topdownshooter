@@ -5,8 +5,8 @@ using UnityEngine.AI;
 
 public class Enemy : MonoBehaviour {
 	public const float WALK_SPEED = 1.7f;
-	public const float CHASE_SPEED = 6f;
-	public const float CHASE_INITIATE_DISTANCE = 13f;
+	public const float CHASE_SPEED = 8f;
+	public const float CHASE_INITIATE_DISTANCE = 15f;
 	public const float CHASE_THRESHOLD_DISTANCE = 20f;
 	public const float ATTACK_DISTANCE = 2f;
 	public const float DAMAGE = 5f;
