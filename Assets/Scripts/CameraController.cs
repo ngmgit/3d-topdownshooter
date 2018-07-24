@@ -8,7 +8,7 @@ public class CameraController : MonoBehaviour {
 	public Vector3 m_cameraOffsets;
 
 	// Update is called once per frame
-	void Update () {
+	void LateUpdate () {
 		transform.position = m_target.position + m_cameraOffsets;
 	}
 }
