@@ -11,14 +11,15 @@ public class ZombieAttack : ZombieFSMBase {
 
 	// OnStateUpdate is called on each Update frame between OnStateEnter and OnStateExit callbacks
 	override public void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex) {
+		if (!m_enemyScript.m_isDead) {
+			if (Vector3.Distance(m_player.transform.position, NPC.transform.position) > Enemy.ATTACK_DISTANCE) {
+				animator.SetBool ("Attack", false);
+			}
 
-		if (Vector3.Distance(m_player.transform.position, NPC.transform.position) > Enemy.ATTACK_DISTANCE) {
-			animator.SetBool ("Attack", false);
+			Vector3 relativePos = m_player.transform.position - NPC.transform.position;
+			Quaternion rotation = Quaternion.LookRotation(relativePos);
+			NPC.transform.rotation = rotation;
 		}
-
-		Vector3 relativePos = m_player.transform.position - NPC.transform.position;
-        Quaternion rotation = Quaternion.LookRotation(relativePos);
-        NPC.transform.rotation = rotation;
 	}
 
 	// OnStateExit is called when a transition ends and the state machine finishes evaluating this state

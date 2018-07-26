@@ -14,6 +14,7 @@ public class GameController : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
+		m_totalEnemies = 40;
 		foreach (Transform spawn in m_spawnPoints) {
 			for (int i = 0; i< 10 ; i++) {
 				Instantiate(m_zombie, spawn);

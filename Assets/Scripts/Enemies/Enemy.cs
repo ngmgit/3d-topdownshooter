@@ -16,13 +16,16 @@ public class Enemy : MonoBehaviour {
 
 	float currentHealth;
 	Animator m_animator;
-	[HideInInspector]
-	public GameObject m_player;
 	GameController m_gameCtrlScript;
 	GameObject m_gameCtrl;
+	NavMeshAgent m_agent;
 
+	[HideInInspector]
+	public GameObject m_player;
 	public float m_wanderRange;
 	public float m_damageDistance;
+	[HideInInspector]
+	public bool m_isDead = false;
 
 
 	public Vector3 GetRandomNavMeshPositin () {
@@ -36,6 +39,7 @@ public class Enemy : MonoBehaviour {
 		m_player = GameObject.FindGameObjectWithTag ("Player");
 		m_gameCtrl = GameObject.FindGameObjectWithTag ("GameController");
 		m_gameCtrlScript = m_gameCtrl.GetComponent <GameController> ();
+		m_agent = GetComponent <NavMeshAgent> ();
 		currentHealth = HEALTH;
 
 		if (GetComponent <Animator> ()) {
@@ -49,6 +53,11 @@ public class Enemy : MonoBehaviour {
 		m_animator.SetBool("Walk", true);
 	}
 
+	void Update () {
+		if (transform.position.y < -1) {
+			Destroy (gameObject);
+		}
+	}
 	void OnTriggerEnter (Collider col) {
 		if (col.tag == "Player") {
 			m_animator.SetBool ("Attack", true);
@@ -70,13 +79,30 @@ public class Enemy : MonoBehaviour {
 	void TakeDamage () {
 		currentHealth -= DAMAGE_ONHIT;
 		if (currentHealth <= 0) {
-			m_gameCtrlScript.EnemyDied();
+			m_animator.SetBool ("Dead", true);
 		}
 	}
 
+	// Detect tracer particle to damge the zombie
 	void OnParticleCollision(GameObject other) {
 		if (other.tag == "BulletTracer") {
 			TakeDamage();
 		}
+	}
+
+
+	// Used to disable neccessary component when zombie dies
+	// NOTE:
+	// Using Animation events to trigger the method
+	void SetDeadState () {
+		m_isDead = true;
+		m_gameCtrlScript.EnemyDied();
+
+		m_agent.velocity = Vector3.zero;
+		m_agent.isStopped = true;
+		m_agent.enabled = false;
+
+		GetComponent<CapsuleCollider>().enabled = false;
+		GetComponent<SphereCollider>().enabled = false;
 	}
 }

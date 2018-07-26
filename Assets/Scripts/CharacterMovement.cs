@@ -34,12 +34,12 @@ public class CharacterMovement : MonoBehaviour {
 		if (m_bulletDistance == 0) {
 			SetBulletDistance ();
 		}
+
+		m_tracerGameObject.SetActive (m_input.m_shoot);
 	}
 
 	void FixedUpdate ()
 	{
-
-		m_tracerGameObject.SetActive (m_input.m_shoot);
 
 		if (m_input.m_shoot) {
 			m_gunParticleSystem.Emit(1);

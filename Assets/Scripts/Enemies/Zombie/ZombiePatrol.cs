@@ -13,13 +13,15 @@ public class ZombiePatrol : ZombieFSMBase {
 
 	// OnStateUpdate is called on each Update frame between OnStateEnter and OnStateExit callbacks
 	override public void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex) {
-		if (Vector3.Distance(m_player.transform.position, NPC.transform.position) < Enemy.CHASE_INITIATE_DISTANCE) {
-			animator.SetBool ("Chase", true);
-			return;
-		}
-		if (!m_agent.pathPending) {
-			if (m_agent.remainingDistance <= m_agent.stoppingDistance) {
-				m_agent.destination = NPC.GetComponent<Enemy>().GetRandomNavMeshPositin ();
+		if (!m_enemyScript.m_isDead) {
+			if (Vector3.Distance(m_player.transform.position, NPC.transform.position) < Enemy.CHASE_INITIATE_DISTANCE) {
+				animator.SetBool ("Chase", true);
+				return;
+			}
+			if (!m_agent.pathPending) {
+				if (m_agent.remainingDistance <= m_agent.stoppingDistance) {
+					m_agent.destination = NPC.GetComponent<Enemy>().GetRandomNavMeshPositin ();
+				}
 			}
 		}
 	}

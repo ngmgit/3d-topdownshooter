@@ -16,7 +16,7 @@ public class ZombieChase : ZombieFSMBase {
 			animator.SetBool ("Chase", false);
 			return;
 		}
-		if (!m_agent.pathPending) {
+		if (!m_agent.pathPending && !m_enemyScript.m_isDead) {
 			m_agent.destination = m_player.transform.position;
 		}
 	}
