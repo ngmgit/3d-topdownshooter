@@ -7,26 +7,49 @@ public class CharacterMovement : MonoBehaviour {
 
 	public float m_speed =  1.3f;
 	public Text m_healthText;
-	public ParticleSystem m_bulletParticleSystem;
+	public GameObject m_tracerGameObject;
+	public ParticleSystem m_gunParticleSystem;
 
 	Rigidbody rb;
 	float m_health = 150f;
 	Vector3 lookPos;
 	InputController m_input;
-	ParticleSystem.EmissionModule m_emissionModule;
+	ParticleSystem m_TracerParticleSystem;
+	float m_bulletDistance = 0;
 
 
 	// Use this for initialization
 	void Start ()
 	{
+		m_TracerParticleSystem = m_tracerGameObject.GetComponent <ParticleSystem> ();
 		m_healthText.text = "HEALTH: " + m_health;
 		rb = GetComponent<Rigidbody>();
 		m_input = GetComponent<InputController>();
-		m_emissionModule = m_bulletParticleSystem.emission;
 	}
 
 	void Update ()
 	{
+		rotatePlayerAlongMousePosition ();
+
+		if (m_bulletDistance == 0) {
+			SetBulletDistance ();
+		}
+	}
+
+	void FixedUpdate ()
+	{
+
+		m_tracerGameObject.SetActive (m_input.m_shoot);
+
+		if (m_input.m_shoot) {
+			m_gunParticleSystem.Emit(1);
+		}
+
+		Vector3 movement  =  new Vector3(m_input.m_horizontal, 0, m_input.m_vertical);
+		rb.AddForce(movement.normalized * m_speed);
+	}
+
+	void rotatePlayerAlongMousePosition () {
 		Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
 		RaycastHit hit;
 
@@ -38,14 +61,20 @@ public class CharacterMovement : MonoBehaviour {
 		lookDir.y = 0;
 
 		transform.LookAt (transform.position + lookDir, Vector3.up);
-
-		m_emissionModule.enabled = m_input.m_shoot;
 	}
 
-	void FixedUpdate ()
-	{
-		Vector3 movement  =  new Vector3(m_input.m_horizontal, 0, m_input.m_vertical);
-		rb.AddForce(movement.normalized * m_speed / Time.deltaTime);
+	void SetBulletDistance () {
+		Vector3 lookPos;
+
+		Ray ray = Camera.main.ViewportPointToRay(new Vector3(0, 0.8f,0));
+		RaycastHit hit;
+
+		if (Physics.Raycast(ray, out hit, 100)) {
+			lookPos = new Vector3(hit.point.x, transform.position.y, hit.point.z);
+			m_bulletDistance = Vector3.Distance (transform.position, lookPos);
+			ParticleSystem.MainModule m_main = m_TracerParticleSystem.main;
+			m_main.startLifetime = ( m_bulletDistance / m_main.startSpeed.constant ) / 1.5f ;
+		}
 	}
 
 	public void DamagePlayer (float dmg) {

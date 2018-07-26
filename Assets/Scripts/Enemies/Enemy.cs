@@ -11,10 +11,15 @@ public class Enemy : MonoBehaviour {
 	public const float ATTACK_DISTANCE = 2f;
 	public const float DAMAGE = 5f;
 
-	NavMeshAgent m_agent;
+	const float HEALTH = 100;
+	const float DAMAGE_ONHIT = 20;
+
+	float currentHealth;
 	Animator m_animator;
 	[HideInInspector]
 	public GameObject m_player;
+	GameController m_gameCtrlScript;
+	GameObject m_gameCtrl;
 
 	public float m_wanderRange;
 	public float m_damageDistance;
@@ -29,7 +34,9 @@ public class Enemy : MonoBehaviour {
 
 	void Awake () {
 		m_player = GameObject.FindGameObjectWithTag ("Player");
-		m_agent = GetComponent <NavMeshAgent> ();
+		m_gameCtrl = GameObject.FindGameObjectWithTag ("GameController");
+		m_gameCtrlScript = m_gameCtrl.GetComponent <GameController> ();
+		currentHealth = HEALTH;
 
 		if (GetComponent <Animator> ()) {
 			m_animator = GetComponent <Animator> ();
@@ -48,9 +55,28 @@ public class Enemy : MonoBehaviour {
 		}
 	}
 
+	void OnTriggerEnterStay (Collider col) {
+		if (col.tag == "Player") {
+			m_animator.SetBool ("Attack", true);
+		}
+	}
+
 	void DamagePlayer () {
 		if (Vector3.Distance(m_player.transform.position, transform.position) < m_damageDistance) {
 			m_player.GetComponent<CharacterMovement>().DamagePlayer(Enemy.DAMAGE);
+		}
+	}
+
+	void TakeDamage () {
+		currentHealth -= DAMAGE_ONHIT;
+		if (currentHealth <= 0) {
+			m_gameCtrlScript.EnemyDied();
+		}
+	}
+
+	void OnParticleCollision(GameObject other) {
+		if (other.tag == "BulletTracer") {
+			TakeDamage();
 		}
 	}
 }
