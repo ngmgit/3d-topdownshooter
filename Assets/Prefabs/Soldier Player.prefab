@@ -912,6 +912,7 @@ MonoBehaviour:
   m_healthText: {fileID: 0}
   m_tracerGameObject: {fileID: 1728626687825562}
   m_gunParticleSystem: {fileID: 198242000823679008}
+  m_currentHeathImage: {fileID: 0}
 --- !u!114 &114229087968366496
 MonoBehaviour:
   m_ObjectHideFlags: 1

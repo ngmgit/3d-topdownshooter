@@ -9,9 +9,11 @@ public class CharacterMovement : MonoBehaviour {
 	public Text m_healthText;
 	public GameObject m_tracerGameObject;
 	public ParticleSystem m_gunParticleSystem;
+	public Image m_currentHeathImage;
 
+	const float MAX_HEALTH = 150f;
 	Rigidbody rb;
-	float m_health = 150f;
+	float m_health = MAX_HEALTH;
 	Vector3 lookPos;
 	InputController m_input;
 	ParticleSystem m_TracerParticleSystem;
@@ -79,10 +81,16 @@ public class CharacterMovement : MonoBehaviour {
 
 	public void DamagePlayer (float dmg) {
 		m_health = m_health - dmg;
-		SetHealthText ();
+		if (m_health >= 0) {
+			SetHealthText ();
+		}
+
 	}
 
 	void SetHealthText () {
+		float m_healthRatio = m_health / MAX_HEALTH;
+
+		m_currentHeathImage.rectTransform.localScale = new Vector3 (m_healthRatio, 1, 1);
 		m_healthText.text = "HEALTH: " + m_health;
 	}
 }
