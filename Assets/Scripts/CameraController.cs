@@ -4,6 +4,12 @@ using UnityEngine;
 
 public class CameraController : MonoBehaviour {
 
+	/*
+	For isometric camera set up
+	offsets = Vector3 (9, 12, -10)
+	Rotation = Vector3 ( 40, -45, 0)
+
+	 */
 	public Transform m_target;
 	public Vector3 m_cameraOffsets;
 

@@ -556,7 +556,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_target: {fileID: 1926250003}
-  m_cameraOffsets: {x: 0, y: 22, z: -5}
+  m_cameraOffsets: {x: 0, y: 18, z: -5}
 --- !u!20 &282840813
 Camera:
   m_ObjectHideFlags: 0
@@ -1964,7 +1964,7 @@ GameObject:
   m_Layer: 0
   m_Name: Spawn4
   m_TagString: Untagged
-  m_Icon: {fileID: 0}
+  m_Icon: {fileID: 3936346786652291628, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
@@ -3354,7 +3354,7 @@ GameObject:
   m_Layer: 0
   m_Name: Spawn2
   m_TagString: Untagged
-  m_Icon: {fileID: 0}
+  m_Icon: {fileID: 7250588514170254948, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
@@ -3622,7 +3622,7 @@ GameObject:
   m_Layer: 0
   m_Name: GameManager
   m_TagString: GameController
-  m_Icon: {fileID: 0}
+  m_Icon: {fileID: -964228994112308473, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
@@ -3673,7 +3673,7 @@ GameObject:
   m_Layer: 0
   m_Name: Spawn3
   m_TagString: Untagged
-  m_Icon: {fileID: 0}
+  m_Icon: {fileID: 419385456094870383, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
@@ -3701,7 +3701,7 @@ GameObject:
   m_Layer: 0
   m_Name: Spawn1
   m_TagString: Untagged
-  m_Icon: {fileID: 0}
+  m_Icon: {fileID: -964228994112308473, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
