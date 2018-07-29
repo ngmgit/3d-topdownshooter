@@ -31,7 +31,7 @@ public class CharacterMovement : MonoBehaviour {
 
 	void Update ()
 	{
-		rotatePlayerAlongMousePosition ();
+		RotatePlayerAlongMousePosition ();
 
 		if (m_bulletDistance == 0) {
 			SetBulletDistance ();
@@ -51,7 +51,7 @@ public class CharacterMovement : MonoBehaviour {
 		rb.AddForce(movement.normalized * m_speed);
 	}
 
-	void rotatePlayerAlongMousePosition () {
+	void RotatePlayerAlongMousePosition () {
 		Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
 		RaycastHit hit;
 
