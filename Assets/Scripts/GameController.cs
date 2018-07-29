@@ -4,8 +4,6 @@ using UnityEngine;
 using UnityEngine.UI;
 
 public class GameController : MonoBehaviour {
-
-	public List<Transform> m_spawnPoints;
 	public GameObject m_zombie;
 	public int m_totalEnemies;
 	public Text m_deathContText;
@@ -14,10 +12,10 @@ public class GameController : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-		m_totalEnemies = 40;
-		foreach (Transform spawn in m_spawnPoints) {
-			for (int i = 0; i< 10 ; i++) {
-				Instantiate(m_zombie, spawn);
+		m_totalEnemies = transform.childCount * 4;
+		foreach (Transform spawnObject in transform) {
+			for (int i = 0; i< 4 ; i++) {
+				Instantiate(m_zombie, spawnObject.transform);
 			}
 		}
 	}
