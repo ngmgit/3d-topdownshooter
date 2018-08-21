@@ -1,4 +1,5 @@
 Top Down shooter project in Unity3D 2018.1.1f1.
+Video URL : https://gfycat.com/OfficialIdealEarwig
 
 * Just a sample project to learn and work on a 3D prototype.
 * Art assets like Models, Music etc are used from open source or free ones and are not done by me.
